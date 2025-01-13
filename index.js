@@ -7,6 +7,15 @@ const createGrid = (rows, cols) => {
   return grid;
 };
 
+// Randomly populate the grid
+const populateGrid = (grid) => {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      grid[i][j] = Math.random() > 0.7 ? 1 : 0; // 30% chance of being alive
+    }
+  }
+};
+
 // Print the grid to the console
 const printGrid = (grid) => {
   console.clear();
@@ -49,21 +58,18 @@ const updateGrid = (grid) => {
 };
 
 // Main function to run the Game of Life
-const runGameOfLife = (rows, cols, iterations) => {
+const runGameOfLife = (rows, cols, iterations, delay) => {
   let grid = createGrid(rows, cols);
+  populateGrid(grid);
 
-  // Initialize with a simple pattern (glider)
-  grid[1][2] = 1;
-  grid[2][3] = 1;
-  grid[3][1] = 1;
-  grid[3][2] = 1;
-  grid[3][3] = 1;
-
-  for (let i = 0; i < iterations; i++) {
+  const interval = setInterval(() => {
     printGrid(grid);
     grid = updateGrid(grid);
-  }
+    if (--iterations <= 0) {
+      clearInterval(interval);
+    }
+  }, delay);
 };
 
-// Run the Game of Life with a 10x10 grid for 20 iterations
-runGameOfLife(10, 10, 20);
+// Run the Game of Life with a 20x20 grid for 100 iterations with a 500ms delay
+runGameOfLife(20, 20, 100, 500);
