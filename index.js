@@ -73,3 +73,4 @@ const runGameOfLife = (rows, cols, iterations, delay) => {
 
 // Run the Game of Life with a 20x20 grid for 100 iterations with a 500ms delay
 runGameOfLife(20, 20, 100, 500);
+// Fixed bug.jpeg ( en gros j'ai fix un bug sur cette ligne)
